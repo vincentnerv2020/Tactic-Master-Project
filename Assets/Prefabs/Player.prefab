@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 686692596}
   - component: {fileID: 686692597}
   - component: {fileID: 686692598}
+  - component: {fileID: 686692599}
   m_Layer: 0
   m_Name: SlowMoShoot
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   Feedbacks:
   - {fileID: 686692597}
   - {fileID: 686692598}
+  - {fileID: 686692599}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -162,11 +164,57 @@ MonoBehaviour:
     TargetBPM: 120
   DebugActive: 0
   Mode: 0
-  TimeScale: 0.5
-  TimeScaleDuration: 1
-  TimeScaleLerp: 0
-  TimeScaleLerpSpeed: 1
+  TimeScale: 0.025
+  TimeScaleDuration: 0.5
+  TimeScaleLerp: 1
+  TimeScaleLerpSpeed: 3
   ResetTimescaleOnStop: 0
+--- !u!114 &686692599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686692594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2ce51367856bd49b72678cc4263225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Sound
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Sfx: {fileID: 8300000, guid: 38f5c698af5c63645a7a92c4e9df7abe, type: 3}
+  RandomSfx: []
+  TestButton: 0
+  TestStopButton: 0
+  PlayMethod: 1
+  PoolSize: 10
+  MinVolume: 0.4
+  MaxVolume: 0.4
+  MinPitch: 1
+  MaxPitch: 1.2
+  SfxAudioMixerGroup: {fileID: 0}
 --- !u!1 &1537787717
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +308,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3685958674493254929
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604453651291672646}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 3bf626041b0e848e8917535734a4e638, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0bbd34f0c4cc13943af31a517bb077d7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &740984452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604453651291672646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76892a0f080ee244b7f83083b4d0622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 1537787718}
+  bulletPrefab: {fileID: 1424375318157209170, guid: 03a6e91d286039c478e02155163f4b17, type: 3}
+  bulletRadius: 0.1
+  targetsList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bulletSpeed: 50
+  bulletEase: 3
+  bulletForce: 1750
+  upForce: 2500
+  bodyHitFeedBack: {fileID: 0}
+  slowMo: {fileID: 686692596}
+  index: 0
+  rotationSpeed: 0
 --- !u!1001 &1684487194961498610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -679,40 +774,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 3bf626041b0e848e8917535734a4e638, type: 3}
   m_PrefabInstance: {fileID: 3685958674493254935}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &3685958674493254929
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4604453651291672646}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 3bf626041b0e848e8917535734a4e638, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0bbd34f0c4cc13943af31a517bb077d7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &740984452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4604453651291672646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76892a0f080ee244b7f83083b4d0622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 1537787718}
-  bulletPrefab: {fileID: 1424375318157209170, guid: 03a6e91d286039c478e02155163f4b17, type: 3}
-  target: {fileID: 0}
-  bulletSpeed: 10
-  bulletEase: 6
-  slowMo: {fileID: 0}

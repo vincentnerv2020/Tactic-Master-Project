@@ -64,44 +64,50 @@ public class Shooting : MonoBehaviour
         bulletInstance.transform.DOMove(targetsList[currentIndex].position, bulletSpeed).SetEase(bulletEase).SetSpeedBased(true).OnStart(SlowMo).OnComplete(() => BulletContact(bulletInstance, targetsList[currentIndex]));
         index++;
     }
-
     void BulletContact(GameObject obj, Transform target)
     {
         Enemy enemyInstance = target.GetComponentInParent<Enemy>();
-        
-        enemyInstance.Death();
-        Collider[] bones = Physics.OverlapSphere(obj.transform.position, bulletRadius);
-        foreach (var col in bones)
+        if (enemyInstance.isAlive)
         {
-            if (col.GetComponent<Rigidbody>())
+            enemyInstance.Death();
+            Collider[] bones = Physics.OverlapSphere(obj.transform.position, bulletRadius);
+            foreach (var col in bones)
             {
-                Rigidbody bone = col.GetComponent<Rigidbody>();
-                bone.AddForce(obj.transform.forward * bulletForce + Vector3.up*upForce);
-                break;
-            }
-            else
-            {
-                continue;
-            }
+                if (col.GetComponent<Rigidbody>())
+                {
+                    Rigidbody bone = col.GetComponent<Rigidbody>();
+                    bone.AddForce(obj.transform.forward * bulletForce + Vector3.up * upForce);
+                    Debug.Log("Force");
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
 
+            }
+            bodyHitFeedBack.PlayFeedbacks();
         }
-        bodyHitFeedBack.PlayFeedbacks();
+       
        
         Destroy(obj);
     }
-
-
-
     public void RotateTargetAndShoot()
     {
         if (index >= targetsList.Count)
         {
             index = 0;
         }
-        transform.DOLookAt(targetsList[index].position,rotationSpeed,AxisConstraint.None, Vector3.up).OnComplete(Shoot);
+        transform.DOLookAt(targetsList[index].position,rotationSpeed,AxisConstraint.Y, Vector3.up).OnComplete(Shoot);
     }
     void SlowMo()
     {
         slowMo.PlayFeedbacks();
+    }
+
+
+    public void AddTarget(Transform bone)
+    {
+
     }
 }
