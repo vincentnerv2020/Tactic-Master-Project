@@ -92,6 +92,7 @@ public class Shooting : MonoBehaviour
     }
     public void RotateToTargetAndShoot()
     {
+        Debug.Log("Shoot");
         if (index >= targetsList.Count)
         {
             index = 0;
