@@ -2013,3 +2013,4 @@ Received Import Request.
 Start importing Assets/0.Tactic Master/Scripts/FSM/InputManager.cs using Guid(8c05ee9e6bae0bc4e96b50844715c3ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45007535b860cefcea92de73488723bd') in 0.004082 seconds 
   Import took 0.012536 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
