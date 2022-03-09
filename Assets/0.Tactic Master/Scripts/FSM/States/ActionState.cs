@@ -10,6 +10,10 @@ public class ActionState : PlayerBaseState
         playerStateMachine.inputManager.HandleJoystick(false);
         playerStateMachine.movementScript.enabled = false;
 
+        //Activate buttons
+        playerStateMachine.ActionButton.SetActive(true);
+        playerStateMachine.CompleteSelectionButton.SetActive(false);
+
         //Handle animation
         playerStateMachine.anim.SetBool("IsAiming", true);
 

@@ -16,6 +16,10 @@ public class AimState : PlayerBaseState
         //Handle animation
         playerStateMachine.anim.SetBool("IsAiming", true);
 
+        //Activate buttons
+        playerStateMachine.ActionButton.SetActive(false);
+        playerStateMachine.CompleteSelectionButton.SetActive(true);
+
         //Handle camera view
         playerStateMachine.movementCamera.Priority = 0;
         playerStateMachine.actionCamera.Priority = 0;
@@ -34,10 +38,13 @@ public class AimState : PlayerBaseState
             if (hit)
             {
                 Debug.Log("Hit " + hitInfo.transform.gameObject.name);
-                GameActions.OnTargetSelected(hitInfo.transform);
-                playerStateMachine.SwitchState(playerStateMachine.ActionState);
+               
+
+                //Finish selecting bones
+               // playerStateMachine.SwitchState(playerStateMachine.ActionState);
                 if (hitInfo.transform.gameObject.tag == "Enemy")
                 {
+                    GameActions.OnTargetSelected(hitInfo.transform);
                     Debug.Log("It's working!");
                 }
                 else
@@ -52,12 +59,9 @@ public class AimState : PlayerBaseState
             Debug.Log("Mouse is down");
         }
     }
-
     public override void OnEnterTrigger(PlayerStateMachine playerStateMachine, string triggerTag)
     {
 
     }
 
-
-  
 }

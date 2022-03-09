@@ -23,6 +23,7 @@ public class Shooting : MonoBehaviour
     private void OnEnable()
     {
         GameActions.OnTargetSelected += InitializeTarget;
+        GameActions.OnBoneSelected += AddBoneToList;
     }
 
     private void OnDisable()
@@ -111,14 +112,14 @@ public class Shooting : MonoBehaviour
     {
         slowMo.PlayFeedbacks();
     }
-    public void AddTarget(Transform bone)
+    public void AddBoneToList(Transform bone)
     {
-
+        targetsList.Add(bone);
     }
 
 
     void InitializeTarget(Transform enemy)
     {
-        //transform.GetComponent<Enemy>().ShowBodyHitCanvas();
+        enemy.GetComponent<Enemy>().ShowBodyHitCanvas();
     }
 }

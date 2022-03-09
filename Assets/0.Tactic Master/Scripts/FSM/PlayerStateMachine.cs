@@ -27,19 +27,28 @@ public class PlayerStateMachine : MonoBehaviour
 
     //Other
     public Animator anim;
+
+    public GameObject ActionButton;
+    public GameObject CompleteSelectionButton;
+
     private void Awake()
     {
         movementScript = GetComponent<Movement>();
         inputManager = GetComponent<InputManager>();
+
+        ActionButton.SetActive(false);
+        CompleteSelectionButton.SetActive(false);
     }
     private void OnEnable()
     {
         GameActions.OnTargetSelected += OnTargetIdentified;
+        GameActions.OnBoneSelected += ReturnToAim;
     }
  
     private void OnDisable()
     {
         GameActions.OnTargetSelected -= OnTargetIdentified;
+        GameActions.OnBoneSelected -= ReturnToAim;
     }
     private void Start()
     {
@@ -77,6 +86,20 @@ public class PlayerStateMachine : MonoBehaviour
         selectionCamera.Priority = 10;
         selectionCamera.m_LookAt = enemyBody;
         selectionCamera.m_Follow = enemyBody;
-        selectionCamera.m_Lens.FieldOfView = 50;
+        selectionCamera.m_Lens.FieldOfView = 75;
+    }
+
+
+    void ReturnToAim(Transform enemy)
+    {
+
+        selectionCamera.Priority = 0;
+        aimingCamera.Priority = 10;
+    }
+
+    //When All targets setup
+    public void FinishSelection()
+    {
+        this.SwitchState(this.ActionState);
     }
 }
