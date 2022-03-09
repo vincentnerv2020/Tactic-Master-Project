@@ -17,6 +17,7 @@ public class ActionState : PlayerBaseState
         playerStateMachine.movementCamera.Priority = 0;
         playerStateMachine.actionCamera.Priority = 10;
         playerStateMachine.aimingCamera.Priority = 0;
+        playerStateMachine.selectionCamera.Priority = 0;
     }
 
     public override void UpdateState(PlayerStateMachine playerStateMachine)

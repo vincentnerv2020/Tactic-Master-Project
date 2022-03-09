@@ -40,7 +40,11 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
-
         ActivateRagdoll(true);
+    }
+
+    public void ShowBodyHitCanvas()
+    {
+        Debug.Log("Canvas showed");
     }
 }

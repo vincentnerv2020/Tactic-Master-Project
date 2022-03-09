@@ -7,7 +7,7 @@ public class RunState : PlayerBaseState
     public override void EnterState(PlayerStateMachine playerStateMachine)
     {
         playerStateMachine.inputManager.HandleJoystick(true);
-
+        playerStateMachine.selectionCamera.Priority = 0;
         playerStateMachine.movementCamera.Priority = 10;
         playerStateMachine.actionCamera.Priority = 0;
         playerStateMachine.aimingCamera.Priority = 0;
@@ -38,7 +38,11 @@ public class RunState : PlayerBaseState
 
     public override void OnEnterTrigger(PlayerStateMachine playerStateMachine, string triggerTag)
     {
-        playerStateMachine.SwitchState(playerStateMachine.ActionState);
+
+        
+        //Must be aim state
+       // playerStateMachine.SwitchState(playerStateMachine.ActionState);
+        playerStateMachine.SwitchState(playerStateMachine.AimState);
 
     }
 }

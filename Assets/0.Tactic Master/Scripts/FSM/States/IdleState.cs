@@ -11,6 +11,7 @@ public class IdleState : PlayerBaseState
         playerStateMachine.anim.SetFloat("Speed", playerStateMachine.inputManager.movementAxis.magnitude);
 
         //Change camera 
+        playerStateMachine.selectionCamera.Priority = 0;
         playerStateMachine.movementCamera.Priority = 10;
         playerStateMachine.actionCamera.Priority = 0;
         playerStateMachine.aimingCamera.Priority = 0;

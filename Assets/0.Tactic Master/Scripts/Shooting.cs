@@ -20,7 +20,15 @@ public class Shooting : MonoBehaviour
 
     public int index = 0;
     public float rotationSpeed;
+    private void OnEnable()
+    {
+        GameActions.OnTargetSelected += InitializeTarget;
+    }
 
+    private void OnDisable()
+    {
+        GameActions.OnTargetSelected -= InitializeTarget;
+    }
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -106,5 +114,11 @@ public class Shooting : MonoBehaviour
     public void AddTarget(Transform bone)
     {
 
+    }
+
+
+    void InitializeTarget(Transform enemy)
+    {
+        //transform.GetComponent<Enemy>().ShowBodyHitCanvas();
     }
 }

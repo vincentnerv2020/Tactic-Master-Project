@@ -23,6 +23,7 @@ public class PlayerStateMachine : MonoBehaviour
     public CinemachineVirtualCamera movementCamera; 
     public CinemachineVirtualCamera aimingCamera;
     public CinemachineVirtualCamera actionCamera;
+    public CinemachineVirtualCamera selectionCamera;
 
     //Other
     public Animator anim;
@@ -33,12 +34,12 @@ public class PlayerStateMachine : MonoBehaviour
     }
     private void OnEnable()
     {
-        //GameActions.TurnLeft += LeanPlayerLeft;
+        GameActions.OnTargetSelected += OnTargetIdentified;
     }
  
     private void OnDisable()
     {
-       // GameActions.TurnLeft -= LeanPlayerLeft;
+        GameActions.OnTargetSelected -= OnTargetIdentified;
     }
     private void Start()
     {
@@ -49,6 +50,8 @@ public class PlayerStateMachine : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this);
+        //Test enemy canvas showing
+      
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,5 +64,19 @@ public class PlayerStateMachine : MonoBehaviour
         state.EnterState(this);
     }
 
-  
+    void OnTargetIdentified(Transform enemy)
+    {
+        //Handle camera view
+        SetCameraToTarget(enemy.transform);
+    }
+    void SetCameraToTarget(Transform enemyBody)
+    {
+        movementCamera.Priority = 0;
+        actionCamera.Priority = 0;
+        aimingCamera.Priority = 0;
+        selectionCamera.Priority = 10;
+        selectionCamera.m_LookAt = enemyBody;
+        selectionCamera.m_Follow = enemyBody;
+        selectionCamera.m_Lens.FieldOfView = 50;
+    }
 }
