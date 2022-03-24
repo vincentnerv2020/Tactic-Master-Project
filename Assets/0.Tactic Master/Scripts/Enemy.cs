@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,8 +15,12 @@ public class Enemy : MonoBehaviour
 
     public Transform[] bones; //0-Head, 1-Body, 2-L hand, 3-R.hand, 4-L.Leg, 5-R.Leg
     public GameObject canvas;
+    public NavMeshAgent ai;
+    EnemyStateManager esm;
     private void Awake()
     {
+        ai = GetComponent<NavMeshAgent>();
+        esm = GetComponent<EnemyStateManager>();
         mainCollider = GetComponent<Collider>();
         AllCollider = GetComponentsInChildren<Collider>(true);
         AllRigidbodies = GetComponentsInChildren<Rigidbody>();
@@ -24,9 +29,10 @@ public class Enemy : MonoBehaviour
 
     void ActivateRagdoll(bool isRagdoll)
     {
-        isAlive = !isRagdoll;
-
-        foreach(var col in AllCollider)
+        
+        //ai.enabled = !isRagdoll;
+        //esm.enabled = !isRagdoll;
+        foreach (var col in AllCollider)
         col.enabled = isRagdoll;
 
         foreach (var rbs in AllRigidbodies)
@@ -35,12 +41,14 @@ public class Enemy : MonoBehaviour
         mainCollider.enabled = !isRagdoll;
         GetComponent<Rigidbody>().useGravity = !isRagdoll;
         GetComponentInChildren<Animator>().enabled = !isRagdoll;
+        isAlive = !isRagdoll;
 
     }
 
     public void Death()
     {
         ActivateRagdoll(true);
+        GameActions.OnEnemyDied();
     }
 
     public void ShowBodyHitCanvas()

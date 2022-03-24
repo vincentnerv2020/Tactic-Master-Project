@@ -73,10 +73,14 @@ public class Shooting : MonoBehaviour
     }
     void BulletContact(GameObject obj, Transform target)
     {
+        Debug.Log(target.ToString());
         Enemy enemyInstance = target.GetComponentInParent<Enemy>();
-        if (enemyInstance.isAlive)
-        {
+        Debug.Log(enemyInstance.gameObject.name.ToString());
+        if (enemyInstance !=null) 
+        { 
             enemyInstance.Death();
+            Debug.Log("Bullet Contact");
+            
             Collider[] bones = Physics.OverlapSphere(obj.transform.position, bulletRadius);
             foreach (var col in bones)
             {
@@ -89,14 +93,23 @@ public class Shooting : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("NoBonesFound");
                     continue;
                 }
 
             }
             bodyHitFeedBack.PlayFeedbacks();
         }
-       
-       
+        else
+        {
+            enemyInstance = target.GetComponent<Enemy>();
+            enemyInstance.Death();
+            Rigidbody bone = enemyInstance.GetComponent<Rigidbody>();
+            bone.AddForce(obj.transform.forward * bulletForce + Vector3.up * upForce);
+            Debug.Log("Force");
+            Debug.Log("Bullet Contact2");
+           
+        }
         Destroy(obj);
     }
     public void RotateToTargetAndShoot()

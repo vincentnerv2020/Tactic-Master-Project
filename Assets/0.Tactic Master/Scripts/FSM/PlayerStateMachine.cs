@@ -92,7 +92,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     void ReturnToAim(Transform enemy)
     {
-
         selectionCamera.Priority = 0;
         aimingCamera.Priority = 10;
     }
